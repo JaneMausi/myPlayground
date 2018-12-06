@@ -1,5 +1,5 @@
 1 How did viewing a diff between two versions of a file help you see the bug that was introduced?
-##If the program was running with no problem before, but starts having troubles after the modification, then we know there must be somthing wrong with the modification we made. Obviously viewing the difference between two versions of a file can be really helpful for spotting the bug.
+## If the program was running with no problem before, but starts having troubles after the modification, then we know there must be somthing wrong with the modification we made. Obviously viewing the difference between two versions of a file can be really helpful for spotting the bug.
 
 2 How could having easy access to the entire history of a file make you a more efficient programmer in the long term?
 ##If I know the entire history of a file which was modified by not only myself but others as well, I will have a better understanding on how and why this file is like this today. I can avoid making same mistakes.
