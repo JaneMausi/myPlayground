@@ -1,5 +1,5 @@
 
-![Capture.PNG](:storage\6f250b5e-1044-4374-81ec-89d5c007e6d5\6afa6b19.PNG)
+![Capture.PNG](pic/1.PNG)
 ## MXC AXS Wallet
 #### Latest Release: V 1.1 
 ## Why is MXC AXS Wallet created
