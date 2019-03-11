@@ -1,5 +1,5 @@
 
-![Capture.PNG](pic/1.PNG)
+![](/pic/0.PNG)
 ## MXC AXS Wallet
 #### Latest Release: V 1.1 
 ## Why is MXC AXS Wallet created
@@ -20,21 +20,21 @@
 - You can check balance of your Ether and MXC
 - You can check status of your locked MXC
 
-![wallet page.PNG](:storage\6f250b5e-1044-4374-81ec-89d5c007e6d5\fabf3006.PNG)
+![](/pic/1.PNG)
 
 - You can check transaction histories. Each history is linked to corresponding transaction record on [etherscan.io](https://etherscan.io/)
 
-![transaction page.PNG](:storage\6f250b5e-1044-4374-81ec-89d5c007e6d5\4ca2319d.PNG)
+![](/pic/2.PNG)
 
 - Send Ether, MXC
 
-![send Eth.PNG](:storage\6f250b5e-1044-4374-81ec-89d5c007e6d5\4e7997fe.PNG)
+![](/pic/3.PNG)
 
-![send MXC.PNG](:storage\6f250b5e-1044-4374-81ec-89d5c007e6d5\6e8f5d12.PNG)
+![](/pic/4.PNG)
 
 - Grant MXC tokens
 
-![grant tokens.PNG](:storage\6f250b5e-1044-4374-81ec-89d5c007e6d5\7abb0dbf.PNG)
+![](/pic/5.PNG)
 
 This is one interesting feature of MXC AXS Wallet. When you want to deliver your tokens to someone gradually, you can choose to __Grant__ tokens to the address, with cliff period and vesting period defined.
 
