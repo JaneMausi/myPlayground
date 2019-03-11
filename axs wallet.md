@@ -45,15 +45,16 @@ The amount one can redeem per month equals to the value of grant amount being de
 *__Example:__*
 A granted B 1000 MXC on 1st January this year, defing cliff periods as 3, vesting periods as 10.
 
+![](/pic/qqq.PNG)
 
-
-From the moment A click __Grant Tokens__, B can start having redeemable tokens in 3 months, in 10 months B should be able to redeem all 1000 MXC tokens. 
-Now let's calculate how much B can redeem tokens in what way. 
-Amount = 1000
-Vesting periods = 10
-Redeemable amount per month = amount/vesting periods = 100
-B should be able to redeem 3 * 100 MXC tokens on 31st March ( 3 * 30 days ).
-Next month, on 30th April ( 30 days ), B should be able redeem 1 * 100 MXC tokens. So on and so forth, B can redeem 1 * 100 tokens per month until October ( specifically on 27th October ), B can redeem all 1000 MXC tokens.
+From the moment A click __Grant Tokens__, B can start having redeemable tokens in 3 months, in 10 months B should be able to redeem all 1000 MXC tokens.<br> 
+Now let's calculate how much B can redeem tokens in what way. <br> 
+Amount = 1000<br> 
+Vesting periods = 10<br> 
+Redeemable amount per month = amount/vesting periods = 100<br> 
+B should be able to redeem 3 * 100 MXC tokens on 31st March ( 3 * 30 days ).<br> 
+Next month, on 30th April ( 30 days ), B should be able redeem 1 * 100 MXC tokens. <br> 
+So on and so forth, B can redeem 1 * 100 tokens per month until October ( specifically on 27th October ), B can redeem all 1000 MXC tokens.
 
 ## Notes for developer
 
