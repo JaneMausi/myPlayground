@@ -10,7 +10,6 @@ import (
 )
 
 func main() {
-	InitLogWriter()
 	// deal with input
 	if len(os.Args) != 3 {
 		Fatal("Invalid input params.")
@@ -41,7 +40,6 @@ func main() {
 	}()
 
 	buf := make([]byte, 1024)
-	read_len := 0
 	for {
 		n, err := rbuff.Read(buf)
 		if err != nil && err != io.EOF {
@@ -50,7 +48,6 @@ func main() {
 		if n == 0 {
 			break
 		}
-		read_len += n
 	}
 	// read password from console
 	stdinReader := bufio.NewReader(os.Stdin)
@@ -66,8 +63,8 @@ func main() {
 		Fatal(err)
 	}
 	fmt.Printf("result:\n %s \n",base64.StdEncoding.EncodeToString(result))
-	write_len, err := wbuff.Write(result[:read_len])
-	if write_len != read_len || err != nil {
+	_, err = wbuff.Write(result)
+	if err != nil {
 		Fatal(err)
 	}
 	if err = wbuff.Flush(); err != nil {
