@@ -1,3 +1,0 @@
-Questions to discuss:
-1. can I just add new issues on GitLab under different projects? It is more organized and easier.
- To be discussed...
