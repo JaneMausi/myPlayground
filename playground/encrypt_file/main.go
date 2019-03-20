@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"bytes"
 	"fmt"
 	AES "gitlab.com/MXCFoundation/util/aes_encryption"
 	"io"
@@ -37,9 +36,17 @@ func main() {
 		}
 	}()
 
-	readBuff := bytes.NewBuffer(make([]byte, 1024))
-	if _, err = readBuff.ReadFrom(reader); err != nil && err != io.EOF {
-		Fatal(err)
+	readBuff := make([]byte, 1024)
+	readLen := 0
+	for {
+		n, err := reader.Read(readBuff)
+		if err != nil && err != io.EOF {
+			Fatal(err)
+		}
+		if n == 0 {
+			break
+		}
+		readLen += n
 	}
 
 	// read password from console
@@ -49,24 +56,26 @@ func main() {
 	if err != nil {
 		Fatal(err)
 	}
+	//fmt.Printf("\nkey: %s \n", key)
+
 	// encrypt file
-	fmt.Printf("\nkey: %s \n", key)
-	result, err := AES.AesEncrypt(readBuff.Bytes(), key[:len(key)-1])
+	//fmt.Printf("\nLength of original data: %d\n", readLen)
+	result, err := AES.AesEncrypt(readBuff[:readLen], key[:len(key)-1])
 	if err != nil {
 		Fatal(err)
 	}
-	fmt.Printf("\nResult data:\n %s \n", string(result))
+	//fmt.Printf("\nResult data(%d):\n %s \n", len(result), base64.StdEncoding.EncodeToString(result))
 
 	origData, err := AES.AesDecrypt(result, key[:len(key)-1])
 	if err != nil {
 		Fatal(err)
 	}
-	fmt.Printf("\nDecrypted data:\n %s \n", string(origData))
+	fmt.Printf("\nDecrypted data(%d):\n %s \n", len(origData), string(origData))
 
 	// write encrypted file
-	writeBuff := bytes.NewBuffer(result)
-	if _, err = writeBuff.WriteTo(writer); err != nil {
+	writeLen, err := writer.Write(result)
+	if err != nil {
 		Fatal(err)
 	}
-
+	fmt.Printf("\nWrite encrypted data to file (%d) \n", writeLen)
 }
