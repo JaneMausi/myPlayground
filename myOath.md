@@ -1,1 +1,2 @@
 - Before taking a long break, all changes should be commented and submitted.
+- Do not return in a loop!! Unless it is very necessary, check every specific case.
