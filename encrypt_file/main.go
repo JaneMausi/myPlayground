@@ -3,18 +3,42 @@ package main
 import (
 	"bufio"
 	"fmt"
-	AES "gitlab.com/MXCFoundation/util/aes_encryption"
+	AES "gitlab.com/MXCFoundation/payments-service/util/aes_encryption"
 	"io"
 	"os"
 )
 
-func main() {
-	// deal with input
-	if len(os.Args) != 3 {
-		Fatal("Invalid input params.")
+func readDynamicSize(initSize int, reader *os.File, readBuff []byte) ([]byte, error) {
+	readLen := 0
+	tmpBuff := make([]byte, initSize)
+
+	for {
+		n, err := reader.ReadAt(tmpBuff, int64(len(readBuff)))
+		if err != nil && err != io.EOF {
+			Fatal(err)
+		}
+
+		if err == io.EOF {
+			return append(readBuff, tmpBuff...), err
+		}
+
+		readLen += n
+		if readLen >= len(tmpBuff) {
+			readBuff = append(readBuff, tmpBuff...)
+			readBuff, err = readDynamicSize(initSize, reader, readBuff)
+			if err == io.EOF {
+				break
+			}
+		}
+
 	}
-	originalFile := os.Args[1]
-	encryptedFile := os.Args[2]
+
+	return readBuff, nil
+}
+
+func main() {
+	originalFile := "./configuration/payment_service.toml"
+	encryptedFile := "./configuration/payment_service.toml.enc"
 
 	reader, err := os.OpenFile(originalFile, os.O_RDONLY, 0644)
 	if err != nil {
@@ -36,18 +60,7 @@ func main() {
 		}
 	}()
 
-	readBuff := make([]byte, 1024)
-	readLen := 0
-	for {
-		n, err := reader.Read(readBuff)
-		if err != nil && err != io.EOF {
-			Fatal(err)
-		}
-		if n == 0 {
-			break
-		}
-		readLen += n
-	}
+	readBuff, _ := readDynamicSize(1024, reader, []byte(""))
 
 	// read password from console
 	stdinReader := bufio.NewReader(os.Stdin)
@@ -59,8 +72,8 @@ func main() {
 	//fmt.Printf("\nkey: %s \n", key)
 
 	// encrypt file
-	//fmt.Printf("\nLength of original data: %d\n", readLen)
-	result, err := AES.AesEncrypt(readBuff[:readLen], key[:len(key)-1])
+	fmt.Printf("\nLength of readBuff: %d\n", len(readBuff))
+	result, err := AES.AesEncrypt(readBuff[:len(readBuff)-1], key[:len(key)-1])
 	if err != nil {
 		Fatal(err)
 	}
